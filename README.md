@@ -37,7 +37,7 @@ This repository contains a Streamlit-based dashboard designed to optimize and vi
    Check out the streamlit app:
    ```bash
    https://sharpe-optimization.streamlit.app/
-   
+
 ## Disclaimer
 This tool is designed for educational purposes only. The simulations and optimizations performed by this dashboard are based on historical data and should not be considered as financial advice. Always consult with a certified financial advisor before making investment decisions.
 
@@ -48,4 +48,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Contributions are welcome! Please fork this repository and submit a pull request with your improvements.
 
 ## Contact
-For any inquiries, feel free to reach out through my LinkedIn.
+For any inquiries, feel free to reach out through my LinkedIn (https://www.linkedin.com/in/m-meswania/).
