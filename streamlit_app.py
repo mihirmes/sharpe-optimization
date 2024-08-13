@@ -6,7 +6,7 @@ import streamlit as st
 import plotly.graph_objects as go
 
 # Set Streamlit page layout to wide
-st.set_page_config(page_title='Sharpe Optimization', page_icon='📈', layout="wide")
+st.set_page_config(page_title='Sharpe Optimization', page_icon=':bar_chart:', layout="wide")
 
 # Streamlit input section
 st.title('Sharpe Ratio Optimization Dashboard')
@@ -112,35 +112,13 @@ def plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=0.03, num_p
         name='Random Portfolios'
     ))
 
-    # Capital Market Line (CML)
-    cml_x = [0, sdp]
-    cml_y = [risk_free_rate, rp]
-
-    fig.add_trace(go.Scatter(
-        x=cml_x,
-        y=cml_y,
-        mode='lines+text',
-        line=dict(color='red', width=2, dash='dash'),
-        name='Capital Market Line',
-        hoverinfo='none'
-    ))
-
     # Highlight portfolio with max Sharpe ratio (Market Portfolio)
     fig.add_trace(go.Scatter(
         x=[sdp],
         y=[rp],
         mode='markers',
         marker=dict(color='red', size=10),
-        name='Market Portfolio'
-    ))
-
-    # Plot the risk-free rate
-    fig.add_trace(go.Scatter(
-        x=[0],
-        y=[risk_free_rate],
-        mode='markers',
-        marker=dict(color='red', size=10),
-        name=f'Risk-Free Rate: {risk_free_rate*100:.2f}%'
+        name='Max Sharpe Ratio Portfolio'
     ))
 
     # Set plot limits and legend
@@ -150,16 +128,16 @@ def plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=0.03, num_p
         yaxis_title='Return',
         showlegend=True,
         legend=dict(
-            x=0,
+            x=0.8,
             y=1,
             xanchor='left',
             yanchor='top',
-            bordercolor="Black",
-            borderwidth=1
+            bordercolor="white",
+            borderwidth=2
         ),
-        height=600,
-        xaxis=dict(range=[min(0, min_volatility), 1.1*max_volatility]),
-        yaxis=dict(range=[min(0, 1.1*min_return), max(1.1*risk_free_rate,1.1*max_return)])
+        height=600
+        # xaxis=dict(range=[0.9*min_volatility, 1.1*max_volatility]),
+        # yaxis=dict(range=[0.9*min_return, 1.1*max_return])
     )
 
     st.plotly_chart(fig)
@@ -183,12 +161,9 @@ def plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=0.03, num_p
 
     col02.subheader('Portfolio Details')
     col02.divider()
-    col02.write(f'Max Sharpe Ratio Portfolio Allocation\n')
     col02.write(f'Annualized Return: {rp:.2%}')
     col02.write(f'Annualized Volatility: {sdp:.2%}')
     col02.write(f'Sharpe Ratio: {results[2,max_sharpe_idx]:.2f}\n')
-
-    st.markdown("Dashboard made by Mihir Meswania")
 
 
 # Fetch historical data
@@ -219,3 +194,13 @@ try:
     st.info("**Disclaimer:** The information generated is not to be taken as investing advice. The purpose of this dashboard is completely educational and to visualize portfolio sharpe ratio optimization")
 except Exception:
     st.error('Error fetching historical stock data')
+
+with st.expander("Understand the Sharpe Ratio"):
+    st.write('test')
+
+st.markdown("""
+<a href="https://www.linkedin.com/in/m-meswania/" style="text-decoration:none;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width:25px; height:25px; vertical-align:middle; margin-right:5px; margin-bottom:5px"> 
+    Meswania, Mihir
+</a>
+""", unsafe_allow_html=True)
