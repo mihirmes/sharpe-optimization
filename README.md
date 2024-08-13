@@ -11,7 +11,7 @@ This repository contains a Streamlit-based dashboard designed to optimize and vi
 - **Portfolio Optimization**: Simulate and optimize portfolios with thousands of iterations to find the one with the highest Sharpe Ratio.
 - **Interactive Visualization**: Visualize the efficient frontier and the distribution of simulated portfolios.
 - **Portfolio Composition**: View the composition of the optimized portfolio in a pie chart.
-- **Customizable Inputs**: Choose from predefined ticker sets or input your custom list. Adjust the number of portfolio simulations to control precision and computational time.
+- **Customizable Inputs**: Choose from predefined Vanguard ETF sets. Adjust the number of portfolio simulations to control precision and computational time.
 
 ## How to Use
 
