@@ -18,7 +18,7 @@ default_ticker_options = {
     'Vanguard US Equities Growth ETFs': ['IVOG', 'MGK', 'VBK', 'VIOG', 'VONG', 'VOOG', 'VOT', 'VTWG', 'VUG', '^TNX'],
     'Vanguard US Equities Value ETFs': ['IVOV', 'MGV', 'VBR', 'VIOV', 'VOE', 'VONV', 'VOOV', 'VTV', 'VTWV', '^TNX'],
     'Vanguard Broad Market Global Bonds ETFs': ['BIV', 'BLV', 'BND', 'BNDW', 'BNDX', 'BSV', '^TNX'],
-    'Tech Giants': ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA', 'LLY', '^TNX'],
+    'Magnificent 7': ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA', '^TNX'],
     'Custom': 'Custom'
 }
 
