@@ -196,7 +196,41 @@ except Exception:
     st.error('Error fetching historical stock data')
 
 with st.expander("Understand the Sharpe Ratio"):
-    st.write('test')
+    st.markdown(r"""
+    ## Understanding the Sharpe Ratio
+    
+    ### What is the Sharpe Ratio?
+    The Sharpe Ratio is a crucial financial metric used to evaluate the risk-adjusted return of an investment portfolio. 
+                Developed by Nobel laureate William F. Sharpe, the ratio helps investors understand how much excess return they are 
+                receiving for the extra volatility they take on when investing in a riskier asset.
+    ### Formula for the Sharpe Ratio
+    The Sharpe Ratio is calculated using the following formula:
+    $$Sharpe Ratio = \frac{R_p - R_f}{\sigma_p}$$
+    Where:
+    - $$R_p$$ is the expected portfolio return.
+    - $$R_f$$ is the risk-free rate of return.
+    - $$\sigma_p$$ is the portfolio's standard deviation (a measure of volatility).
+
+    ### Interpretation
+    A higher Sharpe Ratio indicates that a portfolio's returns are higher relative to the amount of risk taken. Conversely, a lower Sharpe Ratio suggests that the returns do not justify the risk. Generally, a Sharpe Ratio greater than 1.0 is considered good, while a ratio above 2.0 is considered very good.
+
+    ### Example Calculation
+    Suppose you have a portfolio with an expected annual return of 10% ($$R_p = 0.10$$), a risk-free rate of 3% ($$R_f = 0.03$$), and a standard deviation of 15% ($$\sigma_p = 0.15$$). The Sharpe Ratio would be calculated as follows:
+    $$Sharpe Ratio = \frac{0.10 - 0.03}{0.15} = \frac{0.07}{0.15} = 0.47$$
+    In this case, the Sharpe Ratio of 0.47 suggests that the portfolio's returns are relatively low compared to the amount of risk being taken. 
+
+    ### Uses of the Sharpe Ratio
+    - **Portfolio Comparison**: The Sharpe Ratio allows investors to compare different portfolios or investments on a risk-adjusted basis. A higher Sharpe Ratio indicates a more favorable risk-return tradeoff.
+    - **Performance Evaluation**: Portfolio managers often use the Sharpe Ratio to assess the performance of their investments relative to a benchmark or other portfolios.
+    - **Risk Management**: By focusing on risk-adjusted returns, the Sharpe Ratio helps investors make more informed decisions about which investments provide the best returns for the level of risk assumed.
+
+    ### Limitations
+    While the Sharpe Ratio is widely used, it has some limitations:
+    - It assumes that returns are normally distributed, which may not always be the case.
+    - It does not differentiate between upward and downward volatility, treating all volatility as a negative factor.
+
+    Despite these limitations, the Sharpe Ratio remains one of the most popular and useful tools for evaluating investment performance.
+    """)
 
 st.markdown("""
 <a href="https://www.linkedin.com/in/m-meswania/" style="text-decoration:none;">
