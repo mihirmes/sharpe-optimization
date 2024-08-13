@@ -6,12 +6,12 @@ import streamlit as st
 import plotly.graph_objects as go
 
 # Set Streamlit page layout to wide
-st.set_page_config(layout="wide")
+st.set_page_config(page_title='Sharpe Optimization', page_icon='📈', layout="wide")
 
 # Streamlit input section
 st.title('Sharpe Ratio Optimization Dashboard')
 st.sidebar.header('Portfolio Optimization Inputs')
-st.sidebar.number_input('Number of Portfolio Iterations', min_value=10000, max_value=1000000, value=10000, step=10000, help='A higher number will yield more consistent results, but will take longer to compute')
+num_portfolios = st.sidebar.number_input('Number of Portfolio Iterations', min_value=10000, max_value=1000000, value=10000, step=10000, help='Note: A higher number will yield more consistent results, but will take longer to compute')
 
 # Predefined ticker options
 default_ticker_options = {
@@ -19,18 +19,11 @@ default_ticker_options = {
     'Vanguard US Equities Value ETFs': ['IVOV', 'MGV', 'VBR', 'VIOV', 'VOE', 'VONV', 'VOOV', 'VTV', 'VTWV', '^TNX'],
     'Vanguard Broad Market Global Bonds ETFs': ['BIV', 'BLV', 'BND', 'BNDW', 'BNDX', 'BSV', '^TNX'],
     'Magnificent 7': ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA', '^TNX'],
-    'Custom': 'Custom'
 }
 
 # Radio button for selecting default tickers or custom input
 ticker_option = st.sidebar.radio('Select a Ticker Set', list(default_ticker_options.keys()))
-
-# Input for custom tickers if 'Custom' is selected
-if ticker_option == 'Custom':
-    custom_tickers = st.sidebar.text_input('Enter tickers separated by commas (e.g., AAPL,MSFT,GOOGL)').upper()
-    tickers = [ticker.strip() for ticker in custom_tickers.split(',')]
-else:
-    tickers = default_ticker_options[ticker_option]
+tickers = default_ticker_options[ticker_option]
 
 # Default period is set to 5 years
 period = '5y'
@@ -152,7 +145,7 @@ def plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=0.03, num_p
 
     # Set plot limits and legend
     fig.update_layout(
-        title='Efficient Frontier',
+        title='Portfolio Visualization Along Efficient Frontier',
         xaxis_title='Volatility',
         yaxis_title='Return',
         showlegend=True,
@@ -199,28 +192,30 @@ def plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=0.03, num_p
 
 
 # Fetch historical data
-data = get_historical_data(tickers, period=period)
-
-# Check if '^TNX' (10-year treasury yield) is in the data for risk-free rate
-if '^TNX' in tickers:
-    risk_free_rate = data['^TNX'].iloc[-1] / 100
-    data = data.drop(columns=['^TNX'])
-else:
-    try:    
-        risk_free_rate = yf.download("^TNX", period='1d')  # Updated default risk-free rate
-    except Exception:
+try:
+    data = get_historical_data(tickers, period=period)
+    # Check if '^TNX' (10-year treasury yield) is in the data for risk-free rate
+    if '^TNX' in tickers:
+        risk_free_rate = data['^TNX'].iloc[-1] / 100
+        data = data.drop(columns=['^TNX'])
+    else:
         risk_free_rate = 0.03  # Updated default risk-free rate
 
-# Clean the data by removing tickers with missing values
-data.dropna(axis=0, inplace=True)
+    # Clean the data by removing missing tickers
+    data.dropna(axis=1, inplace=True)
 
-# Calculate annual returns and covariance matrix
-mean_returns, cov_matrix = calculate_annual_returns_and_cov_matrix(data)
+    # Clean the data by removing missing values
+    data.dropna(axis=0, inplace=True)
 
-# Optimize portfolio
-num_assets = len(data.columns)
-opt_result = optimize_portfolio(mean_returns, cov_matrix, num_assets, risk_free_rate)
+    # Calculate annual returns and covariance matrix
+    mean_returns, cov_matrix = calculate_annual_returns_and_cov_matrix(data)
 
-# Plot efficient frontier and portfolio composition
-plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=risk_free_rate)
-st.info("**Disclaimer:** The information generated is not to be taken as investing advice. The purpose of this dashboard is completely educational and to visualize portfolio sharpe ratio optimization")
+    # Optimize portfolio
+    num_assets = len(data.columns)
+    opt_result = optimize_portfolio(mean_returns, cov_matrix, num_assets, risk_free_rate)
+
+    # Plot efficient frontier and portfolio composition
+    plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=risk_free_rate, num_portfolios=num_portfolios)
+    st.info("**Disclaimer:** The information generated is not to be taken as investing advice. The purpose of this dashboard is completely educational and to visualize portfolio sharpe ratio optimization")
+except Exception:
+    st.error('Error fetching historical stock data')
