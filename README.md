@@ -1,5 +1,7 @@
 # Sharpe Ratio Optimization Dashboard
 
+https://sharpe-optimization.streamlit.app/
+
 ## Overview
 
 This repository contains a Streamlit-based dashboard designed to optimize and visualize portfolios using the Sharpe Ratio. The dashboard allows users to select predefined sets of tickers or enter custom tickers to simulate and optimize portfolios based on historical market data. The optimization process identifies the portfolio that maximizes the Sharpe Ratio, providing the best risk-adjusted return.
@@ -31,14 +33,19 @@ This repository contains a Streamlit-based dashboard designed to optimize and vi
 4. **Explore the Dashboard**:
    Open the dashboard in your web browser, select your desired ticker set or enter custom tickers, and let the dashboard simulate and optimize your portfolio.
 
-Disclaimer
+5. **OR**:
+   Check out the streamlit app:
+   ```bash
+   https://sharpe-optimization.streamlit.app/
+   
+## Disclaimer
 This tool is designed for educational purposes only. The simulations and optimizations performed by this dashboard are based on historical data and should not be considered as financial advice. Always consult with a certified financial advisor before making investment decisions.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Contributing
+## Contributing
 Contributions are welcome! Please fork this repository and submit a pull request with your improvements.
 
-Contact
+## Contact
 For any inquiries, feel free to reach out through my LinkedIn.
