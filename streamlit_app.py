@@ -106,8 +106,7 @@ def plot_efficient_frontier(mean_returns, cov_matrix, risk_free_rate=0.03, num_p
         marker=dict(
             color=results[2,:],
             colorscale='YlGnBu',
-            showscale=True,
-            size=5
+            showscale=False
         ),
         name='Random Portfolios'
     ))
