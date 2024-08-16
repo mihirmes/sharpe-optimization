@@ -32,7 +32,7 @@ def get_historical_data(tickers, period='5y'):
     """
     Fetch historical market data for a list of tickers.
     """
-    data = yf.download(tickers, period=period, interval='1d')['Adj Close']
+    data = yf.download(tickers, period=period, interval='1d')['Adj Close'][1::]
     return data
 
 def calculate_annual_returns_and_cov_matrix(data):
